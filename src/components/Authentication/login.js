@@ -41,7 +41,7 @@ const Login = ({ navigation }) => {
       dispatch(userActions.setToken(token))
       dispatch(userActions.setIsAdmin(isAdmin))
       dispatch(userActions.setRefreshToken(refreshToken))
-      navigation.navigate('Watchlist')
+      navigation.navigate('Games')
     } catch (err) {
       Alert.alert('Incorrect email or password')
     }

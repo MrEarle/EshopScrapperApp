@@ -6,6 +6,7 @@ import Watchlist from './watchlist'
 import SubscriptionWatchlist from './watchlist/subscribed'
 import About from './About'
 import CreateGameRequest from './watchlist/request'
+import RequestList from './watchlist/requestList'
 
 const AUTH_ROUTE = 'Auth'
 const ADMIN_ROUTE = 'Admin'
@@ -41,7 +42,7 @@ const routes = {
   authed: [
     {
       path: 'watchlist',
-      label: 'Watchlist',
+      label: 'Games',
       Renderer: Watchlist,
       type: AUTH_ROUTE,
     },
@@ -61,8 +62,14 @@ const routes = {
   admin: [
     {
       path: 'create',
-      label: 'Create watchlist',
+      label: 'Create Game',
       Renderer: CreateWatchlist,
+      type: ADMIN_ROUTE,
+    },
+    {
+      path: 'create',
+      label: 'Request List',
+      Renderer: RequestList,
       type: ADMIN_ROUTE,
     },
   ],

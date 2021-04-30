@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { View } from 'react-native'
-import { Divider, Drawer, IndexPath, Text } from '@ui-kitten/components'
-import { DrawerItem } from '@react-navigation/drawer'
+import { Divider, Drawer, IndexPath, Text, DrawerItem } from '@ui-kitten/components'
 import api from '../../api'
 
 export const Header = (props) => {

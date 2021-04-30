@@ -43,6 +43,8 @@ const CreateGameRequest = () => {
         .then((r) => r.json())
       if (!resp || resp.status !== 200) throw new Error()
       Alert.alert('Request successfully created!')
+      setName('')
+      setUrl('')
     } catch (err) {
       Alert.alert('There was an error creating the request')
     }

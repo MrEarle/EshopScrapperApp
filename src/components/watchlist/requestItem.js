@@ -12,7 +12,7 @@ const validateEshopUrl = (url) => {
   return match && match[1]
 }
 
-const RequestItem = ({ request }) => {
+const RequestItem = ({ request, onSubmit }) => {
   const [name, setName] = useState(request.name)
   const [url, setUrl] = useState(request.url)
   const [edit, setEdit] = useState(false)
@@ -43,6 +43,7 @@ const RequestItem = ({ request }) => {
         throw new Error()
       }
       Alert.alert('Game successfully created!')
+      onSubmit()
     } catch (err) {
       Alert.alert('There was an error creating the game')
     }
@@ -100,6 +101,7 @@ RequestItem.propTypes = {
     url: PropTypes.string.isRequired,
     id: PropTypes.any.isRequired,
   }).isRequired,
+  onSubmit: PropTypes.func.isRequired
 }
 
 export default RequestItem

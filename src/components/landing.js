@@ -11,8 +11,8 @@ const Landing = () => {
     <BaseLayout>
       <Text category="h1">Welcome to Eshop Scrapper!</Text>
       {authed ? (
-        <Text category="s1">
-          <Link style={styles.link} to="/Watchlist">
+        <Text category="h4">
+          <Link style={styles.link} to="/Games">
             Browse available games
           </Link>{' '}
           or{' '}
@@ -23,7 +23,7 @@ const Landing = () => {
           affordable!
         </Text>
       ) : (
-        <Text category="s1">
+        <Text category="h4">
           <Link style={styles.link} to="/Log In">
             Log In
           </Link>{' '}
