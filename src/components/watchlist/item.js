@@ -52,7 +52,7 @@ export const RenderCurrentPrice = ({ currentPrice, priceUpdatedAt }) => {
                 borderWidth: 2,
               }}
             >
-              This price wasn not updated today!
+              This price was not updated today!
             </Text>
           </Popover>
         )}

@@ -19,7 +19,7 @@ const Landing = () => {
           <Link style={styles.link} to="/Subscriptions">
             manage your subscriptions
           </Link>{' '}
-          to start getting notification when your favourite games become
+          to start getting notifications when your favorite games become
           affordable!
         </Text>
       ) : (

@@ -2,7 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { View } from 'react-native'
-import { Divider, Drawer, IndexPath, Text, DrawerItem, Icon } from '@ui-kitten/components'
+import {
+  Divider,
+  Drawer,
+  IndexPath,
+  Text,
+  DrawerItem,
+  Icon,
+} from '@ui-kitten/components'
 import api from '../../api'
 import About from '../About'
 
@@ -20,10 +27,14 @@ export const Header = (props) => {
         },
       ]}
     >
-      {email && <Icon name="person-outline" style={{ height: 30, width: 30, marginRight: 5 }} fill="whitesmoke" />}
-      <Text>
-        {email || 'Eshop Scrapper'}
-      </Text>
+      {email && (
+        <Icon
+          name="person-outline"
+          style={{ height: 30, width: 30, marginRight: 5 }}
+          fill="whitesmoke"
+        />
+      )}
+      <Text>{email || 'Eshop Scrapper'}</Text>
     </View>
   )
 }
@@ -52,9 +63,7 @@ export const CustomDrawerContent = ({
   }
 
   const getRenderIcon = (name) => {
-    const RenderIcon = (props) => (
-      <Icon name={name} {...props} />
-    )
+    const RenderIcon = (props) => <Icon name={name} {...props} />
     return RenderIcon
   }
 
@@ -66,14 +75,28 @@ export const CustomDrawerContent = ({
       footer={About}
     >
       {nonAdmin.map(({ label, icon }) => (
-        <DrawerItem title={label} key={label} accessoryLeft={getRenderIcon(icon)} />
+        <DrawerItem
+          title={label}
+          key={label}
+          accessoryLeft={getRenderIcon(icon)}
+        />
       ))}
       <Divider />
       {admin.map(({ label, icon }) => (
-        <DrawerItem title={label} key={label} accessoryLeft={getRenderIcon(icon)} />
+        <DrawerItem
+          title={label}
+          key={label}
+          accessoryLeft={getRenderIcon(icon)}
+        />
       ))}
       <Divider />
-      {isAuthed && <DrawerItem title="Sign Out" onPress={() => api.logout()} accessoryLeft={getRenderIcon('log-out-outline')} />}
+      {isAuthed && (
+        <DrawerItem
+          title="Sign Out"
+          onPress={() => api.logout()}
+          accessoryLeft={getRenderIcon('log-out-outline')}
+        />
+      )}
     </Drawer>
   )
 }

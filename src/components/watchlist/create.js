@@ -1,8 +1,4 @@
-import {
-  Input,
-  Button,
-  Spinner,
-} from '@ui-kitten/components'
+import { Input, Button, Spinner } from '@ui-kitten/components'
 import React from 'react'
 import { useState } from 'react'
 import { Alert } from 'react-native'

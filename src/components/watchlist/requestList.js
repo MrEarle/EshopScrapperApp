@@ -1,20 +1,13 @@
-import {
-  Text,
-  Divider,
-  List,
-  ListItem,
-} from '@ui-kitten/components'
+import { Text, Divider, List, ListItem } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import BaseLayout from '../Navigation/AppHome'
 import RequestItem from './requestItem'
 import { getPaginatedFetch } from '../../api/helper'
 
-
 const fetchRequests = getPaginatedFetch('authed/request')
 
 const RequestList = () => {
-
   const [requests, setRequests] = useState([])
 
   const [loading, setLoading] = useState(true)

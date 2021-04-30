@@ -101,7 +101,7 @@ RequestItem.propTypes = {
     url: PropTypes.string.isRequired,
     id: PropTypes.any.isRequired,
   }).isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
 }
 
 export default RequestItem
