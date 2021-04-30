@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { View } from 'react-native'
@@ -35,17 +35,33 @@ export const CustomDrawerContent = ({
   state,
   routes,
 }) => {
+  const nonAdmin = routes.filter(({ type }) => type !== 'Admin')
+  const admin = routes.filter(({ type }) => type === 'Admin')
+  const [index, setIndex] = useState(new IndexPath(0))
+
+  const onSelectItem = (index) => {
+    let routeIndex = index.row
+    if (index.row >= nonAdmin.length) {
+      routeIndex -= 1
+    }
+    setIndex(index)
+    navigation.navigate(state.routeNames[routeIndex] || 'Home')
+  }
+
   return (
     <Drawer
       header={Header}
-      selectedIndex={new IndexPath(state.index)}
-      onSelect={(index) =>
-        navigation.navigate(state.routeNames[index.row] || 'Home')
-      }
+      selectedIndex={index}
+      onSelect={onSelectItem}
     >
-      {routes.map(({ label }) => (
+      {nonAdmin.map(({ label }) => (
         <DrawerItem title={label} key={label} />
       ))}
+      <Divider />
+      {admin.map(({ label }) => (
+        <DrawerItem title={label} key={label} />
+      ))}
+      <Divider />
       {isAuthed && <DrawerItem title="Sign Out" onPress={() => api.logout()} />}
     </Drawer>
   )

@@ -8,9 +8,9 @@ import About from './About'
 import CreateGameRequest from './watchlist/request'
 import RequestList from './watchlist/requestList'
 
-const AUTH_ROUTE = 'Auth'
-const ADMIN_ROUTE = 'Admin'
-const NO_AUTH_ROUTE = 'NoAuth'
+export const AUTH_ROUTE = 'Auth'
+export const ADMIN_ROUTE = 'Admin'
+export const NO_AUTH_ROUTE = 'NoAuth'
 
 const routes = {
   permanent: [
