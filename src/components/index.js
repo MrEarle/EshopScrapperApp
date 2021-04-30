@@ -8,13 +8,12 @@ const Entry = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    registerForPushNotificationsAsync()
-      .then(expoToken => dispatch(appStateActions.setExpoToken(expoToken)))
+    registerForPushNotificationsAsync().then((expoToken) =>
+      dispatch(appStateActions.setExpoToken(expoToken))
+    )
   }, [])
 
-  return (
-    <AppNavigator />
-  )
+  return <AppNavigator />
 }
 
 export default Entry

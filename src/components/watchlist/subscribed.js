@@ -1,4 +1,12 @@
-import { Input, List, ListItem, Text, Button, Divider, Layout } from '@ui-kitten/components'
+import {
+  Input,
+  List,
+  ListItem,
+  Text,
+  Button,
+  Divider,
+  Layout,
+} from '@ui-kitten/components'
 import React, { useEffect, useState } from 'react'
 import { Alert, Linking, View } from 'react-native'
 import api from '../../api'
@@ -22,14 +30,16 @@ const SubscribedWatchlist = () => {
       _pageSize || pageSize,
       search
     )
-    rows = rows.map(({ id, url, name, Subscription, currentPrice, priceUpdatedAt }) => ({
-      id,
-      url,
-      name,
-      currentPrice,
-      priceUpdatedAt,
-      maxPrice: Subscription.maxPrice,
-    }))
+    rows = rows.map(
+      ({ id, url, name, Subscription, currentPrice, priceUpdatedAt }) => ({
+        id,
+        url,
+        name,
+        currentPrice,
+        priceUpdatedAt,
+        maxPrice: Subscription.maxPrice,
+      })
+    )
     setItemCount(count)
     setWatchlists(() => rows)
     setLoading(false)
@@ -67,7 +77,10 @@ const SubscribedWatchlist = () => {
             {name}
           </Text>
           <Text category="s1">{`Max Price: $${maxPrice}`}</Text>
-          <RenderCurrentPrice currentPrice={currentPrice} priceUpdatedAt={priceUpdatedAt} />
+          <RenderCurrentPrice
+            currentPrice={currentPrice}
+            priceUpdatedAt={priceUpdatedAt}
+          />
           <RenderUnsubscribe onUnsubscribe={getOnUnsubscribe(id)} />
         </View>
       </ListItem>
@@ -76,22 +89,24 @@ const SubscribedWatchlist = () => {
 
   return (
     <BaseLayout>
-      <Layout style={{ width: "100%", alignItems: "center", padding: 10 }}>
+      <Layout style={{ width: '100%', alignItems: 'center', padding: 10 }}>
         <Input
           value={search}
           onChangeText={(e) => setSearch(e)}
-          onKeyPress={({ nativeEvent }) => nativeEvent.key === "Enter" && onRefresh(1, pageSize, search)}
+          onKeyPress={({ nativeEvent }) =>
+            nativeEvent.key === 'Enter' && onRefresh(1, pageSize, search)
+          }
           placeholder="Search"
         />
         <Button
           onPress={() => onRefresh(1, pageSize, search)}
-          style={{ marginTop: 5, width: "100%" }}
+          style={{ marginTop: 5, width: '100%' }}
         >
           Search
         </Button>
       </Layout>
       <List
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         data={watchlists}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}

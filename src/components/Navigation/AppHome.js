@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Layout, Text } from '@ui-kitten/components'
 import { SafeAreaView, StyleSheet } from 'react-native'
-import { useNavigation, DrawerActions } from "@react-navigation/native"
+import { useNavigation, DrawerActions } from '@react-navigation/native'
 
 const BaseLayout = ({ children }) => {
   const navigation = useNavigation()
@@ -25,35 +25,33 @@ const BaseLayout = ({ children }) => {
 }
 
 BaseLayout.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
 }
 
-
 export default BaseLayout
-
 
 const styles = StyleSheet.create({
   layout: {
     flex: 1,
-    height: "100%",
-    width: '100%'
+    height: '100%',
+    width: '100%',
   },
   content: {
     margin: 0,
     padding: '5%',
-    width: "100%",
-    height: "90%",
+    width: '100%',
+    height: '90%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    height: "10%",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    height: '10%',
+    justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingBottom: 5,
-    paddingTop: 20
-  }
+    paddingTop: 20,
+  },
 })

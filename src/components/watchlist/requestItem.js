@@ -1,4 +1,4 @@
-import { Input, Spinner, Button, } from '@ui-kitten/components'
+import { Input, Spinner, Button } from '@ui-kitten/components'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Alert, View } from 'react-native'
@@ -33,10 +33,12 @@ const RequestItem = ({ request }) => {
   const onFinish = async () => {
     setIsLoading(true)
     try {
-      const resp = await api.post(`authed/request/approve/${request.id}`, {
-        name,
-        url,
-      }).then(r => r.json())
+      const resp = await api
+        .post(`authed/request/approve/${request.id}`, {
+          name,
+          url,
+        })
+        .then((r) => r.json())
       if (!resp || resp.status !== 200) {
         throw new Error()
       }
@@ -48,9 +50,7 @@ const RequestItem = ({ request }) => {
   }
 
   return (
-    <View
-      style={{ width: '100%' }}
-    >
+    <View style={{ width: '100%' }}>
       <Input
         value={name}
         label="Name"
@@ -71,18 +71,24 @@ const RequestItem = ({ request }) => {
         textContentType="URL"
         style={{ marginBottom: 10 }}
         status={urlValid ? 'primary' : 'danger'}
-        onBlur={() => setUrlValid(validator.isURL(url) && validateEshopUrl(url))}
-        caption={urlValid ? null : 'Must be an eshop-prices.com url (with currency=CLP)'}
+        onBlur={() =>
+          setUrlValid(validator.isURL(url) && validateEshopUrl(url))
+        }
+        caption={
+          urlValid
+            ? null
+            : 'Must be an eshop-prices.com url (with currency=CLP)'
+        }
         disabled={!edit}
       />
       <Button
-        onPress={() => setEdit(edit => !edit)}
+        onPress={() => setEdit((edit) => !edit)}
         style={{ marginBottom: 10 }}
       >
-        {!edit ? "Edit" : "Stop Editing"}
+        {!edit ? 'Edit' : 'Stop Editing'}
       </Button>
       <Button disabled={!validateAll()} onPress={onFinish}>
-        {isLoading ? <Spinner status="success" /> : "Approve"}
+        {isLoading ? <Spinner status="success" /> : 'Approve'}
       </Button>
     </View>
   )
@@ -92,8 +98,8 @@ RequestItem.propTypes = {
   request: PropTypes.shape({
     name: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    id: PropTypes.any.isRequired
-  }).isRequired
+    id: PropTypes.any.isRequired,
+  }).isRequired,
 }
 
 export default RequestItem

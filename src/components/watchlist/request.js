@@ -35,10 +35,12 @@ const CreateGameRequest = () => {
   const onFinish = async () => {
     setIsLoading(true)
     try {
-      const resp = await api.post('authed/request/', {
-        name,
-        url,
-      }).then(r => r.json())
+      const resp = await api
+        .post('authed/request/', {
+          name,
+          url,
+        })
+        .then((r) => r.json())
       if (!resp || resp.status !== 200) throw new Error()
       Alert.alert('Request successfully created!')
     } catch (err) {
@@ -69,11 +71,21 @@ const CreateGameRequest = () => {
         textContentType="URL"
         style={{ marginBottom: 10 }}
         status={urlValid ? 'primary' : 'danger'}
-        onBlur={() => setUrlValid(validator.isURL(url) && validateEshopUrl(url))}
-        caption={urlValid ? null : 'Must be an eshop-prices.com url (with currency=CLP)'}
+        onBlur={() =>
+          setUrlValid(validator.isURL(url) && validateEshopUrl(url))
+        }
+        caption={
+          urlValid
+            ? null
+            : 'Must be an eshop-prices.com url (with currency=CLP)'
+        }
       />
-      <Button onPress={onFinish} disabled={!validateAll()} style={{ width: "100%" }}>
-        {isLoading ? <Spinner status="success" /> : "Submit"}
+      <Button
+        onPress={onFinish}
+        disabled={!validateAll()}
+        style={{ width: '100%' }}
+      >
+        {isLoading ? <Spinner status="success" /> : 'Submit'}
       </Button>
     </BaseLayout>
   )

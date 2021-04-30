@@ -8,9 +8,8 @@ import { Button, Input, Spinner } from '@ui-kitten/components'
 import BaseLayout from '../Navigation/AppHome'
 import validator from 'validator'
 
-
 const SignUp = ({ navigation }) => {
-  const deviceToken = useSelector(state => state.appState.deviceToken)
+  const deviceToken = useSelector((state) => state.appState.deviceToken)
   const dispatch = useDispatch()
 
   const [email, setEmail] = useState('')
@@ -41,7 +40,7 @@ const SignUp = ({ navigation }) => {
   const onFinish = async () => {
     setIsLoading(true)
     if (password !== password2) {
-      Alert.alert('Passwords don\'t match!')
+      Alert.alert("Passwords don't match!")
       return
     }
 
@@ -51,7 +50,7 @@ const SignUp = ({ navigation }) => {
         password,
         password2,
         username,
-        device: deviceToken
+        device: deviceToken,
       })
       if (!token) return false
       dispatch(userActions.setToken(token))
@@ -86,7 +85,9 @@ const SignUp = ({ navigation }) => {
         onChangeText={setUsername}
         style={styles.input}
         status={usernameValid ? 'primary' : 'danger'}
-        onBlur={() => setUsernameValid(validator.isLength(username, { min: 4 }))}
+        onBlur={() =>
+          setUsernameValid(validator.isLength(username, { min: 4 }))
+        }
         caption={usernameValid ? null : 'Username too short'}
       />
       <Input
@@ -97,7 +98,9 @@ const SignUp = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
         status={passwordValid ? 'primary' : 'danger'}
-        onBlur={() => setPasswordValid(validator.isLength(password, { min: 6 }))}
+        onBlur={() =>
+          setPasswordValid(validator.isLength(password, { min: 6 }))
+        }
         caption={passwordValid ? null : 'Password is too short'}
       />
       <Input
@@ -112,7 +115,7 @@ const SignUp = ({ navigation }) => {
         caption={password2Valid ? null : 'Password does not match'}
       />
       <Button onPress={onFinish} disabled={!validateAll()}>
-        {isLoading ? <Spinner status="success" /> : "Submit"}
+        {isLoading ? <Spinner status="success" /> : 'Submit'}
       </Button>
     </BaseLayout>
   )
@@ -120,8 +123,8 @@ const SignUp = ({ navigation }) => {
 
 SignUp.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func
-  })
+    navigate: PropTypes.func,
+  }),
 }
 
 export default SignUp
@@ -129,5 +132,5 @@ export default SignUp
 const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
-  }
+  },
 })

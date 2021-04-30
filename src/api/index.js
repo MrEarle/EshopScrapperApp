@@ -165,7 +165,7 @@ class Api {
       await fetch(this.url('user/logout'), {
         method: 'POST',
         headers: this.authedHeaders(),
-        body: JSON.stringify({ token: refreshToken })
+        body: JSON.stringify({ token: refreshToken }),
       }).catch((err) => console.log(err))
     }
 
@@ -180,8 +180,8 @@ class Api {
     const response = await fetch(this.url('user/token'), {
       method: 'POST',
       headers: this.baseHeaders,
-      body: JSON.stringify({ token: refreshToken })
-    }).then(res => res.json())
+      body: JSON.stringify({ token: refreshToken }),
+    }).then((res) => res.json())
 
     if (!response || !response.result) throw new Error('API Error')
 
@@ -192,6 +192,6 @@ class Api {
 }
 
 // eslint-disable-next-line no-undef
-const HTTP_API_URL = "https://nameless-refuge-58589.herokuapp.com/"
+const HTTP_API_URL = 'https://nameless-refuge-58589.herokuapp.com/'
 const api = new Api(HTTP_API_URL)
 export default api

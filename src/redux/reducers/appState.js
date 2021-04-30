@@ -4,7 +4,7 @@ const appStateReducer = createSlice({
   name: 'appState',
   initialState: {
     firstOpen: true,
-    expoToken: null
+    expoToken: null,
   },
   reducers: {
     setFirstOpen(state, { payload }) {
@@ -12,7 +12,7 @@ const appStateReducer = createSlice({
     },
     setExpoToken(state, { payload }) {
       state.expoToken = payload
-    }
+    },
   },
 })
 

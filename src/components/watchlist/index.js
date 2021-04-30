@@ -3,7 +3,15 @@ import api from '../../api'
 import RenderSubscribe, { RenderCurrentPrice } from './item'
 import { Alert, Linking, View } from 'react-native'
 import BaseLayout from '../Navigation/AppHome'
-import { Button, Divider, Input, Layout, List, ListItem, Text } from '@ui-kitten/components'
+import {
+  Button,
+  Divider,
+  Input,
+  Layout,
+  List,
+  ListItem,
+  Text,
+} from '@ui-kitten/components'
 import { getPaginatedFetch } from '../../api/helper'
 
 const fetchWatchlists = getPaginatedFetch('authed/watchlist')
@@ -61,7 +69,10 @@ const Watchlist = () => {
             {name}
           </Text>
           <RenderSubscribe onSubscribe={getOnSubscribe(id)} />
-          <RenderCurrentPrice currentPrice={currentPrice} priceUpdatedAt={priceUpdatedAt} />
+          <RenderCurrentPrice
+            currentPrice={currentPrice}
+            priceUpdatedAt={priceUpdatedAt}
+          />
         </View>
       </ListItem>
     )
@@ -72,25 +83,27 @@ const Watchlist = () => {
       style={{
         alignItems: 'center',
         width: '100%',
-        height: '100%'
+        height: '100%',
       }}
     >
-      <Layout style={{ width: "100%", alignItems: "center", padding: 10 }}>
+      <Layout style={{ width: '100%', alignItems: 'center', padding: 10 }}>
         <Input
           value={search}
           onChangeText={(e) => setSearch(e)}
-          onKeyPress={({ nativeEvent }) => nativeEvent.key === "Enter" && onRefresh(1, pageSize, search)}
+          onKeyPress={({ nativeEvent }) =>
+            nativeEvent.key === 'Enter' && onRefresh(1, pageSize, search)
+          }
           placeholder="Search"
         />
         <Button
           onPress={() => onRefresh(1, pageSize, search)}
-          style={{ marginTop: 5, width: "100%" }}
+          style={{ marginTop: 5, width: '100%' }}
         >
           Search
-          </Button>
+        </Button>
       </Layout>
       <List
-        style={{ width: "100%" }}
+        style={{ width: '100%' }}
         data={watchlists}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}

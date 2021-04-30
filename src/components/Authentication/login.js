@@ -9,7 +9,7 @@ import { Input, Button, Spinner } from '@ui-kitten/components'
 import validator from 'validator'
 
 const Login = ({ navigation }) => {
-  const deviceToken = useSelector(state => state.appState.expoToken)
+  const deviceToken = useSelector((state) => state.appState.expoToken)
   const dispatch = useDispatch()
   // const device = useSelector((state) => state.fcm.token)
   const [email, setEmail] = useState('')
@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
       const { token, isAdmin, refreshToken } = await api.logIn({
         email,
         password,
-        device: deviceToken
+        device: deviceToken,
       })
       if (!token) return false
       dispatch(userActions.setToken(token))
@@ -47,7 +47,6 @@ const Login = ({ navigation }) => {
     }
     setIsLoading(false)
   }
-
 
   return (
     <BaseLayout>
@@ -72,11 +71,13 @@ const Login = ({ navigation }) => {
         secureTextEntry
         style={styles.input}
         status={passwordValid ? 'primary' : 'danger'}
-        onBlur={() => setPasswordValid(validator.isLength(password, { min: 6 }))}
+        onBlur={() =>
+          setPasswordValid(validator.isLength(password, { min: 6 }))
+        }
         caption={passwordValid ? null : 'Password is too short'}
       />
       <Button onPress={onFinish} disabled={!validateAll()}>
-        {isLoading ? <Spinner status="success" /> : "Submit"}
+        {isLoading ? <Spinner status="success" /> : 'Submit'}
       </Button>
     </BaseLayout>
   )
@@ -84,8 +85,8 @@ const Login = ({ navigation }) => {
 
 Login.propTypes = {
   navigation: PropTypes.shape({
-    navigate: PropTypes.func
-  })
+    navigate: PropTypes.func,
+  }),
 }
 
 export default Login
@@ -93,5 +94,5 @@ export default Login
 const styles = StyleSheet.create({
   input: {
     marginBottom: 10,
-  }
+  },
 })

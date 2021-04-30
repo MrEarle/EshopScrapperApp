@@ -5,14 +5,21 @@ import BaseLayout from './Navigation/AppHome'
 
 const About = () => (
   <BaseLayout>
-    <Text>Eshop Scrapper created by Benjamin Earle -- Icons made by{' '}
-      <Text style={{ color: 'gray' }} onPress={() => Linking.openURL("https://www.freepik.com")}>
+    <Text>
+      Eshop Scrapper created by Benjamin Earle -- Icons made by{' '}
+      <Text
+        style={{ color: 'gray' }}
+        onPress={() => Linking.openURL('https://www.freepik.com')}
+      >
         Freepik
-      </Text>
-      {' '}from{' '}
-      <Text style={{ color: 'gray' }} onPress={() => Linking.openURL("https://www.flaticon.com/")}>
+      </Text>{' '}
+      from{' '}
+      <Text
+        style={{ color: 'gray' }}
+        onPress={() => Linking.openURL('https://www.flaticon.com/')}
+      >
         www.flaticon.com
-    </Text>
+      </Text>
     </Text>
   </BaseLayout>
 )

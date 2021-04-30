@@ -7,35 +7,46 @@ import { DrawerItem } from '@react-navigation/drawer'
 import api from '../../api'
 
 export const Header = (props) => {
-  const email = useSelector(state => state.user.email)
+  const email = useSelector((state) => state.user.email)
   return (
-    <View style={[
-      props.style,
-      {
-        height: 128,
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: "#222B45"
-      }
-    ]}>
-      <Text>{email || "Eshop Scrapper"}</Text>
+    <View
+      style={[
+        props.style,
+        {
+          height: 128,
+          flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: '#222B45',
+        },
+      ]}
+    >
+      <Text>{email || 'Eshop Scrapper'}</Text>
       <Divider />
     </View>
   )
 }
 
 Header.propTypes = {
-  style: PropTypes.any
+  style: PropTypes.any,
 }
 
-export const CustomDrawerContent = ({ isAuthed = false, navigation, state, routes }) => {
+export const CustomDrawerContent = ({
+  isAuthed = false,
+  navigation,
+  state,
+  routes,
+}) => {
   return (
     <Drawer
       header={Header}
       selectedIndex={new IndexPath(state.index)}
-      onSelect={index => navigation.navigate(state.routeNames[index.row] || "Home")}
+      onSelect={(index) =>
+        navigation.navigate(state.routeNames[index.row] || 'Home')
+      }
     >
-      {routes.map(({ label }) => <DrawerItem title={label} key={label} />)}
+      {routes.map(({ label }) => (
+        <DrawerItem title={label} key={label} />
+      ))}
       {isAuthed && <DrawerItem title="Sign Out" onPress={() => api.logout()} />}
     </Drawer>
   )
@@ -44,15 +55,15 @@ export const CustomDrawerContent = ({ isAuthed = false, navigation, state, route
 CustomDrawerContent.propTypes = {
   isAuthed: PropTypes.bool,
   navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired
+    navigate: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
     index: PropTypes.any.isRequired,
-    routeNames: PropTypes.any.isRequired
+    routeNames: PropTypes.any.isRequired,
   }).isRequired,
   routes: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string.isRequired
+      label: PropTypes.string.isRequired,
     })
-  ).isRequired
+  ).isRequired,
 }

@@ -1,4 +1,12 @@
-import { Input, Button, Text, Spinner, Divider, List, ListItem } from '@ui-kitten/components'
+import {
+  Input,
+  Button,
+  Text,
+  Spinner,
+  Divider,
+  List,
+  ListItem,
+} from '@ui-kitten/components'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Alert } from 'react-native'
@@ -65,10 +73,12 @@ const CreateWatchlist = () => {
   const onFinish = async () => {
     setIsLoading(true)
     try {
-      const resp = await api.post('authed/watchlist', {
-        name,
-        url,
-      }).then(r => r.json())
+      const resp = await api
+        .post('authed/watchlist', {
+          name,
+          url,
+        })
+        .then((r) => r.json())
       if (!resp || resp.status !== 200) throw new Error(resp ? resp.error : '')
       Alert.alert('Game successfully created!')
     } catch (err) {
@@ -106,15 +116,25 @@ const CreateWatchlist = () => {
         textContentType="URL"
         style={{ marginBottom: 10 }}
         status={urlValid ? 'primary' : 'danger'}
-        onBlur={() => setUrlValid(validator.isURL(url) && validateEshopUrl(url))}
-        caption={urlValid ? null : 'Must be an eshop-prices.com url (with currency=CLP)'}
+        onBlur={() =>
+          setUrlValid(validator.isURL(url) && validateEshopUrl(url))
+        }
+        caption={
+          urlValid
+            ? null
+            : 'Must be an eshop-prices.com url (with currency=CLP)'
+        }
       />
-      <Button onPress={onFinish} disabled={!validateAll()} style={{ width: "100%" }}>
-        {isLoading ? <Spinner status="success" /> : "Submit"}
+      <Button
+        onPress={onFinish}
+        disabled={!validateAll()}
+        style={{ width: '100%' }}
+      >
+        {isLoading ? <Spinner status="success" /> : 'Submit'}
       </Button>
       <Divider style={{ marginVertical: 10 }} />
       <List
-        style={{ width: "100%", marginBottom: 100 }}
+        style={{ width: '100%', marginBottom: 100 }}
         data={requests}
         ItemSeparatorComponent={Divider}
         renderItem={renderItem}

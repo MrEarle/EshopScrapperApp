@@ -1,4 +1,4 @@
-import api from "."
+import api from '.'
 
 export const getPaginatedFetch = (url) => async (page, pageSize, search) => {
   const offset = (page - 1) * pageSize

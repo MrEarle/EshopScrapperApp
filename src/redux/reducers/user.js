@@ -5,7 +5,7 @@ const user = {
   token: null,
   email: null,
   isAdmin: false,
-  refreshToken: null
+  refreshToken: null,
 }
 
 const userReducer = createSlice({
