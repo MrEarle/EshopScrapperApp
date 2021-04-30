@@ -1,10 +1,12 @@
 import { Text } from '@ui-kitten/components'
 import React from 'react'
-import { Linking } from 'react-native'
-import BaseLayout from './Navigation/AppHome'
+import PropTypes from 'prop-types'
+import { Linking, View } from 'react-native'
 
-const About = () => (
-  <BaseLayout>
+const About = (props) => (
+  <View style={[props.style, {
+    backgroundColor: '#222B45'
+  }]}>
     <Text>
       Eshop Scrapper created by Benjamin Earle -- Icons made by{' '}
       <Text
@@ -21,7 +23,11 @@ const About = () => (
         www.flaticon.com
       </Text>
     </Text>
-  </BaseLayout>
+  </View>
 )
+
+About.propTypes = {
+  style: PropTypes.any
+}
 
 export default About

@@ -164,7 +164,7 @@ class Api {
     if (refreshToken) {
       await fetch(this.url('user/logout'), {
         method: 'POST',
-        headers: this.authedHeaders(),
+        headers: await this.authedHeaders(),
         body: JSON.stringify({ token: refreshToken }),
       }).catch((err) => console.log(err))
     }
