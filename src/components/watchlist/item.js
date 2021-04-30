@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import moment from "moment"
 import { View } from 'react-native'
-import { Input, Text, Button, Icon, Popover } from '@ui-kitten/components'
+import { Input, Text, Button, Icon, Popover, Spinner } from '@ui-kitten/components'
 import validator from 'validator'
 
 export const RenderCurrentPrice = ({ currentPrice, priceUpdatedAt }) => {
@@ -24,7 +25,7 @@ export const RenderCurrentPrice = ({ currentPrice, priceUpdatedAt }) => {
           Current Price:
         </Text>
         <Text>
-          CLP ${currentPrice}
+          {currentPrice ? `CLP $${currentPrice}` : '-'}
         </Text>
       </View>
       <View style={{ alignItems: "center", flexDirection: "row" }}>
@@ -40,7 +41,7 @@ export const RenderCurrentPrice = ({ currentPrice, priceUpdatedAt }) => {
               anchor={renderWarning}
               visible={visible}
               onBackdropPress={() => setVisible(false)}>
-              <Text style={{ paddingHorizontal: 4, paddingVertical: 8, borderColor: "#ff7700", borderWidth: 2 }}>This price wasn't updated today!</Text>
+              <Text style={{ paddingHorizontal: 4, paddingVertical: 8, borderColor: "#ff7700", borderWidth: 2 }}>This price wasn not updated today!</Text>
             </Popover>
           )}
       </View>
@@ -48,8 +49,21 @@ export const RenderCurrentPrice = ({ currentPrice, priceUpdatedAt }) => {
   )
 }
 
+RenderCurrentPrice.propTypes = {
+  currentPrice: PropTypes.number,
+  priceUpdatedAt: PropTypes.any
+}
+
 const RenderSubscribe = ({ onSubscribe }) => {
   const [maxPrice, setMaxPrice] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const onPress = async () => {
+    setLoading(true)
+    await onSubscribe(maxPrice)
+    setLoading(false)
+  }
+
   return (
     <View
       style={{
@@ -68,22 +82,38 @@ const RenderSubscribe = ({ onSubscribe }) => {
         onKeyPress={({ nativeEvent }) => nativeEvent.key === 'Enter' && maxPrice > 0 && onSubscribe(maxPrice)}
         style={{ marginRight: 5, flex: 1 }}
       />
-      <Button onPress={() => onSubscribe(maxPrice)} disabled={!validator.isInt(maxPrice) && +maxPrice <= 0} style={{ flex: 1, marginLeft: 5 }}>
-        Subscribe
+      <Button onPress={onPress} disabled={!validator.isInt(maxPrice) && +maxPrice <= 0} style={{ flex: 1, marginLeft: 5 }}>
+        {loading ? <Spinner status="success" /> : 'Subscribe'}
       </Button>
     </View>
   )
 }
 
+RenderSubscribe.propTypes = {
+  onSubscribe: PropTypes.func.isRequired,
+}
+
 export const RenderUnsubscribe = ({ onUnsubscribe }) => {
+  const [loading, setLoading] = useState(false)
+
+  const onPress = async () => {
+    setLoading(true)
+    await onUnsubscribe()
+    setLoading(false)
+  }
+
   return <Button
     status="danger"
     appearance="outline"
-    onPress={onUnsubscribe}
+    onPress={onPress}
     style={{ marginTop: 15 }}
   >
-    Unubscribe
-    </Button>
+    {loading ? <Spinner status="success" /> : 'Unsubscribe'}
+  </Button>
+}
+
+RenderUnsubscribe.propTypes = {
+  onUnsubscribe: PropTypes.func.isRequired,
 }
 
 export default RenderSubscribe

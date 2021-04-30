@@ -8,8 +8,8 @@ const About = () => (
     <Text>Eshop Scrapper created by Benjamin Earle -- Icons made by{' '}
       <Text style={{ color: 'gray' }} onPress={() => Linking.openURL("https://www.freepik.com")}>
         Freepik
-    </Text>
-    from{' '}
+      </Text>
+      {' '}from{' '}
       <Text style={{ color: 'gray' }} onPress={() => Linking.openURL("https://www.flaticon.com/")}>
         www.flaticon.com
     </Text>

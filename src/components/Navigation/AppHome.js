@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Icon, Layout, Text } from '@ui-kitten/components'
 import { SafeAreaView, StyleSheet } from 'react-native'
 import { useNavigation, DrawerActions } from "@react-navigation/native"
@@ -21,6 +22,10 @@ const BaseLayout = ({ children }) => {
       </Layout>
     </SafeAreaView>
   )
+}
+
+BaseLayout.propTypes = {
+  children: PropTypes.node
 }
 
 

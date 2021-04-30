@@ -7,9 +7,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'prettier',
-    'prettier/flowtype',
-    'prettier/react',
-    'prettier/standard',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -18,6 +15,6 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react', 'react-native', 'flowtype', 'prettier', 'standard'],
+  plugins: ['react', 'react-native', 'prettier', 'standard'],
   rules: {},
 }

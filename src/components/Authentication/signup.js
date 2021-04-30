@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import api from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { userActions } from '../../redux/reducers/user'
@@ -40,7 +41,7 @@ const SignUp = ({ navigation }) => {
   const onFinish = async () => {
     setIsLoading(true)
     if (password !== password2) {
-      message.alert('Passwords don\'t match!')
+      Alert.alert('Passwords don\'t match!')
       return
     }
 
@@ -115,6 +116,12 @@ const SignUp = ({ navigation }) => {
       </Button>
     </BaseLayout>
   )
+}
+
+SignUp.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
 }
 
 export default SignUp

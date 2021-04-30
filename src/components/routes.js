@@ -68,8 +68,6 @@ const routes = {
   ]
 }
 
-const authedRoutes = admin => admin ? [...routes.admin, ...routes.authed] : routes.authed
-
 const getRoutes = (type) => {
   return routes[type]
 }

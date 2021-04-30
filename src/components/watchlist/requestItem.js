@@ -1,4 +1,5 @@
 import { Input, Spinner, Button, } from '@ui-kitten/components'
+import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Alert, View } from 'react-native'
 import validator from 'validator'
@@ -85,6 +86,14 @@ const RequestItem = ({ request }) => {
       </Button>
     </View>
   )
+}
+
+RequestItem.propTypes = {
+  request: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    id: PropTypes.any.isRequired
+  }).isRequired
 }
 
 export default RequestItem

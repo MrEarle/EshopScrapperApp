@@ -1,29 +1,14 @@
-import { Input, Button, Text, Spinner, Divider, List, ListItem, Layout } from '@ui-kitten/components'
+import { Input, Button, Text, Spinner, Divider, List, ListItem } from '@ui-kitten/components'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Alert, View } from 'react-native'
+import { Alert } from 'react-native'
 import validator from 'validator'
 import api from '../../api'
 import BaseLayout from '../Navigation/AppHome'
 import RequestItem from './requestItem'
+import { validateEshopUrl, getPaginatedFetch } from '../../api/helper'
 
-const validateEshopUrl = (url) => {
-  const pattern = /^https:\/\/eshop-prices\.com\/games\/(\d+)-.+$/
-  const match = pattern.exec(url)
-  if (!match) return null
-  return match && match[1]
-}
-
-const fetchRequests = async (page, pageSize, search) => {
-  const offset = (page - 1) * pageSize
-  const limit = offset + pageSize
-  const { result } = await api.get('authed/request', null, {
-    offset,
-    limit,
-    search,
-  })
-  return result
-}
+const fetchRequests = getPaginatedFetch('authed/request')
 
 const CreateWatchlist = () => {
   const [name, setName] = useState('')
@@ -47,41 +32,34 @@ const CreateWatchlist = () => {
   }
 
   const [loading, setLoading] = useState(true)
-  const [pagination, setPagination] = useState({
-    pageSize: 10,
-    hideOnSinglePage: true,
-    responsive: true,
-    total: 0,
-    position: 'both',
-    current: 1,
-  })
+  const [pageSize, setPageSize] = useState(10)
+  const [itemCount, setItemCount] = useState(0)
 
-  const onRefresh = async (page, pageSize = null, search = null) => {
+  const onRefresh = async (page, _pageSize = null, search = null) => {
     setLoading(true)
     const { count, rows } = await fetchRequests(
       page,
-      pageSize || pagination.pageSize,
+      _pageSize || pageSize,
       search
     )
-    setPagination((pagination) => ({ ...pagination, total: count }))
+    setItemCount(count)
     setRequests(() => rows)
     setLoading(false)
   }
 
   const onEndReached = () => {
-    if (pagination.pageSize < pagination.total) {
-      onChangePagination(1, pagination.pageSize + 10)
+    if (pageSize < itemCount) {
+      onChangePagination(1, pageSize + 10)
     }
   }
 
   useEffect(() => {
-    onRefresh(pagination.current)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    onRefresh(1, pageSize)
   }, [])
 
   const onChangePagination = (page, pageSize) => {
-    setPagination((old) => ({ ...old, current: page, pageSize }))
-    onRefresh(page, pageSize, search)
+    setPageSize(pageSize)
+    onRefresh(page, pageSize)
   }
 
   const onFinish = async () => {
@@ -90,8 +68,8 @@ const CreateWatchlist = () => {
       const resp = await api.post('authed/watchlist', {
         name,
         url,
-      })
-      if (!resp) return false
+      }).then(r => r.json())
+      if (!resp || resp.status !== 200) throw new Error(resp ? resp.error : '')
       Alert.alert('Game successfully created!')
     } catch (err) {
       Alert.alert('There was an error creating the game')

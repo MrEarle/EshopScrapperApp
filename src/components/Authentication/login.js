@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import api from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { userActions } from '../../redux/reducers/user'
@@ -79,6 +80,12 @@ const Login = ({ navigation }) => {
       </Button>
     </BaseLayout>
   )
+}
+
+Login.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func
+  })
 }
 
 export default Login
