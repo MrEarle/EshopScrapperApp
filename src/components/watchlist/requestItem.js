@@ -30,11 +30,11 @@ const RequestItem = ({ request, onSubmit }) => {
       validateEshopUrl(url)
     )
   }
-  const onFinish = async () => {
+  const onFinish = async (accept = true) => {
     setIsLoading(true)
     try {
       const resp = await api
-        .post(`authed/request/approve/${request.id}`, {
+        .post(`authed/request/${accept ? 'approve' : 'reject'}/${request.id}`, {
           name,
           url,
         })
@@ -45,7 +45,7 @@ const RequestItem = ({ request, onSubmit }) => {
       Alert.alert('Game successfully created!')
       onSubmit()
     } catch (err) {
-      Alert.alert('There was an error creating the game')
+      Alert.alert(`There was an error ${accept ? 'creating' : 'rejecting'} the game`)
     }
     setIsLoading(false)
   }
@@ -88,9 +88,14 @@ const RequestItem = ({ request, onSubmit }) => {
       >
         {!edit ? 'Edit' : 'Stop Editing'}
       </Button>
-      <Button disabled={!validateAll()} onPress={onFinish}>
-        {isLoading ? <Spinner status="success" /> : 'Approve'}
-      </Button>
+      <View style={{ width: '100%', justifyContent: 'space-between', flexDirection: 'row' }}>
+        <Button style={{ width: '45%' }} appearance="outline" disabled={!validateAll()} onPress={() => onFinish(true)}>
+          {isLoading ? <Spinner status="success" /> : 'Approve'}
+        </Button>
+        <Button style={{ width: '45%' }} appearance="outline" status="danger" disabled={!validateAll()} onPress={() => onFinish(false)}>
+          {isLoading ? <Spinner status="success" /> : 'Reject'}
+        </Button>
+      </View>
     </View>
   )
 }
