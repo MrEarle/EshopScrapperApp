@@ -61,6 +61,7 @@ const RequestList = () => {
         ListEmptyComponent={!loading && <Text>There are no requests!</Text>}
         onRefresh={() => onRefresh(1)}
         refreshing={loading}
+        keyExtractor={({ id }) => id}
       />
     </BaseLayout>
   )

@@ -115,6 +115,7 @@ const SubscribedWatchlist = () => {
         ListEmptyComponent={!loading && <Text>There are no subscriptions</Text>}
         onRefresh={() => onRefresh(1, pageSize, search)}
         refreshing={loading}
+        keyExtractor={({ id }) => id}
       />
     </BaseLayout>
   )

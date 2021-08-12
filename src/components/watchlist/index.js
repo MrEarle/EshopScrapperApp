@@ -112,6 +112,7 @@ const Watchlist = () => {
         onRefresh={() => onRefresh(1, pageSize, search)}
         ListEmptyComponent={!loading && <Text>No games match your search</Text>}
         refreshing={loading}
+        keyExtractor={({ id }) => id}
       />
     </BaseLayout>
   )
